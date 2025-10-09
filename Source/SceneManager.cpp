@@ -229,6 +229,16 @@ void SceneManager::DefineObjectMaterials()
 	woodMaterial.tag = "wood";
 
 	m_objectMaterials.push_back(woodMaterial);
+
+	OBJECT_MATERIAL tileMaterial;
+	tileMaterial.ambientColor = glm::vec3(0.2f, 0.3f, 0.4f);
+	tileMaterial.ambientStrength = 0.3f;
+	tileMaterial.diffuseColor = glm::vec3(0.3f, 0.2f, 0.1f);
+	tileMaterial.specularColor = glm::vec3(0.4f, 0.5f, 0.6f);
+	tileMaterial.shininess = 25.0f;
+	tileMaterial.tag = "tile";
+
+	m_objectMaterials.push_back(tileMaterial);
 }
 
 /***********************************************************
@@ -428,7 +438,8 @@ void SceneManager::RenderScene()
 		positionXYZ);
 
 	// set the active color values in the shader (RGBA)
-	SetShaderColor(1, 1, 1, 1);
+	//SetShaderColor(1, 1, 1, 1);
+	SetShaderMaterial("tile");
 
 	m_basicMeshes->DrawBoxMesh();
 	/****************************************************************/
