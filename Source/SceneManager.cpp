@@ -198,7 +198,15 @@ void SceneManager::DefineObjectMaterials()
 	/*** There is no limit to the number of object materials that can ***/
 	/*** be defined. Refer to the code in the OpenGL Sample for help  ***/
 
-	
+	OBJECT_MATERIAL goldMaterial;
+	goldMaterial.ambientColor = glm::vec3(0.2f, 0.2f, 0.1f);
+	goldMaterial.ambientStrength = 0.4f;
+	goldMaterial.diffuseColor = glm::vec3(0.3f, 0.3f, 0.2f);
+	goldMaterial.specularColor = glm::vec3(0.6f, 0.5f, 0.4f);
+	goldMaterial.shininess = 22.0f;
+	goldMaterial.tag = "gold";
+
+	m_objectMaterials.push_back(goldMaterial);
 
 }
 
@@ -214,7 +222,7 @@ void SceneManager::SetupSceneLights()
 	// the 3D scene with custom lighting, if no light sources have
 	// been added then the display window will be black - to use the 
 	// default OpenGL lighting then comment out the following line
-	//m_pShaderManager->setBoolValue(g_UseLightingName, true);
+	m_pShaderManager->setBoolValue(g_UseLightingName, true);
 
 	/*** STUDENTS - add the code BELOW for setting up light sources ***/
 	/*** Up to four light sources can be defined. Refer to the code ***/
