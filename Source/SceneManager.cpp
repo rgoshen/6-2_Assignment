@@ -28,6 +28,7 @@ namespace
  ***********************************************************/
 SceneManager::SceneManager(ShaderManager *pShaderManager)
 {
+
 	m_pShaderManager = pShaderManager;
 	m_basicMeshes = new ShapeMeshes();
 }
@@ -346,7 +347,8 @@ void SceneManager::RenderScene()
 		positionXYZ);
 
 	// set the active color values in the shader (RGBA)
-	SetShaderColor(1, 1, 1, 1);
+	//SetShaderColor(1, 1, 1, 1);
+	SetShaderMaterial("gold");
 
 	m_basicMeshes->DrawCylinderMesh();
 	/****************************************************************/
