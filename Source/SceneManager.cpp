@@ -209,6 +209,16 @@ void SceneManager::DefineObjectMaterials()
 
 	m_objectMaterials.push_back(goldMaterial);
 
+
+	OBJECT_MATERIAL cementMaterial;
+	cementMaterial.ambientColor = glm::vec3(0.2f, 0.2f, 0.1f);
+	cementMaterial.ambientStrength = 0.2f;
+	cementMaterial.diffuseColor = glm::vec3(0.5f, 0.5f, 0.5f);
+	cementMaterial.specularColor = glm::vec3(0.4f, 0.4f, 0.4f);
+	cementMaterial.shininess = 0.5f;
+	cementMaterial.tag = "cement";
+
+	m_objectMaterials.push_back(cementMaterial);
 }
 
 /***********************************************************
@@ -317,7 +327,8 @@ void SceneManager::RenderScene()
 		positionXYZ);
 
 	// set the active color values in the shader (RGBA)
-	SetShaderColor(1, 1, 1, 1);
+	//SetShaderColor(1, 1, 1, 1);
+	SetShaderMaterial("cement");
 
 	// draw the mesh with transformation values - this plane is used for the base
 	m_basicMeshes->DrawPlaneMesh();
