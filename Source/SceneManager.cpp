@@ -239,6 +239,17 @@ void SceneManager::DefineObjectMaterials()
 	tileMaterial.tag = "tile";
 
 	m_objectMaterials.push_back(tileMaterial);
+
+	OBJECT_MATERIAL glassMaterial;
+	glassMaterial.ambientColor = glm::vec3(0.4f, 0.4f, 0.4f);
+	glassMaterial.ambientStrength = 0.3f;
+	glassMaterial.diffuseColor = glm::vec3(0.3f, 0.4f, 0.4f);
+	glassMaterial.specularColor = glm::vec3(0.6f, 0.6f, 0.6f);
+	glassMaterial.shininess = 85.0f;
+	glassMaterial.tag = "glass";
+
+	m_objectMaterials.push_back(glassMaterial);
+
 }
 
 /***********************************************************
@@ -468,7 +479,8 @@ void SceneManager::RenderScene()
 		positionXYZ);
 
 	// set the active color values in the shader (RGBA)
-	SetShaderColor(1, 1, 1, 1);
+	//SetShaderColor(1, 1, 1, 1);
+	SetShaderMaterial("glass");
 
 	m_basicMeshes->DrawSphereMesh();
 	/****************************************************************/
