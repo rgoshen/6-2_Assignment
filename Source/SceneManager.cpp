@@ -250,6 +250,16 @@ void SceneManager::DefineObjectMaterials()
 
 	m_objectMaterials.push_back(glassMaterial);
 
+	OBJECT_MATERIAL clayMaterial;
+	clayMaterial.ambientColor = glm::vec3(0.2f, 0.2f, 0.3f);
+	clayMaterial.ambientStrength = 0.3f;
+	clayMaterial.diffuseColor = glm::vec3(0.4f, 0.4f, 0.5f);
+	clayMaterial.specularColor = glm::vec3(0.2f, 0.2f, 0.4f);
+	clayMaterial.shininess = 0.5f;
+	clayMaterial.tag = "clay";
+
+	m_objectMaterials.push_back(clayMaterial);
+
 }
 
 /***********************************************************
@@ -509,7 +519,8 @@ void SceneManager::RenderScene()
 		positionXYZ);
 
 	// set the active color values in the shader (RGBA)
-	SetShaderColor(1, 1, 1, 1);
+	//SetShaderColor(1, 1, 1, 1);
+	SetShaderMaterial("clay");
 
 	m_basicMeshes->DrawConeMesh();
 	/****************************************************************/
