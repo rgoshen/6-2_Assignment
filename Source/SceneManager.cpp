@@ -85,7 +85,7 @@ void SceneManager::SetTransformations(
 	glm::vec3 positionXYZ)
 {
 	// variables for this method
-	glm::mat4 modelView;
+	glm::mat4 model;
 	glm::mat4 scale;
 	glm::mat4 rotationX;
 	glm::mat4 rotationY;
@@ -103,11 +103,11 @@ void SceneManager::SetTransformations(
 
 	// matrix math is used to calculate the final model matrix
 	// model matrix = T * Rx * Ry * Rz * S (apply scale last in code order here)
-	modelView = translation * rotationX * rotationY * rotationZ * scale;
+	model = translation * rotationX * rotationY * rotationZ * scale;
 	if (m_pShaderManager)
 	{
 		// pass the model matrix into the shader
-		m_pShaderManager->setMat4Value(g_ModelName, modelView);
+		m_pShaderManager->setMat4Value(g_ModelName, model);
 	}
 }
 
