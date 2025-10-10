@@ -232,7 +232,7 @@ void ViewManager::PrepareSceneView()
 	{
 		// set the view matrix into the shader for proper rendering
 		m_pShaderManager->setMat4Value(g_ViewName, view);
-		// set the view matrix into the shader for proper rendering
+		// set the projection matrix into the shader for proper rendering
 		m_pShaderManager->setMat4Value(g_ProjectionName, projection);
 		// set the view position of the camera into the shader for proper rendering
 		m_pShaderManager->setVec3Value("viewPosition", g_pCamera->Position);

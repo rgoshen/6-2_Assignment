@@ -102,6 +102,7 @@ void SceneManager::SetTransformations(
 	translation = glm::translate(positionXYZ);
 
 	// matrix math is used to calculate the final model matrix
+	// model matrix = T * Rx * Ry * Rz * S (apply scale last in code order here)
 	modelView = translation * rotationX * rotationY * rotationZ * scale;
 	if (m_pShaderManager)
 	{
@@ -169,6 +170,14 @@ void SceneManager::SetShaderMaterial(
   *
   *  This method is used for configuring the various material
   *  settings for all of the objects within the 3D scene.
+  * 
+  * Material used by the scene (Phong):
+  *   cement: matte floor
+  *   wood: low sheen plank
+  *   gold:   metallic fulcrum (high shininess, neutral specular)
+  *   tile:   ceramic cube (moderate specular)
+  *   glass:  glossy sphere (bright specular)
+  *   clay:   matte cone
   ***********************************************************/
 void SceneManager::DefineObjectMaterials()
 {
@@ -257,7 +266,7 @@ void SceneManager::SetupSceneLights()
 	/*** Up to four light sources can be defined. Refer to the code ***/
 	/*** in the OpenGL Sample for help                              ***/
 
-	 // lightSources[0] — overhead key (broad, modest specular)
+	// lightSources[0]: overhead key (broad, modest specular)
 	m_pShaderManager->setVec3Value("lightSources[0].position", -8.0f, 16.0f, 8.0f);
 	m_pShaderManager->setVec3Value("lightSources[0].ambientColor", 0.05f, 0.05f, 0.05f);
 	m_pShaderManager->setVec3Value("lightSources[0].diffuseColor", 0.07f, 0.07f, 0.07f);
@@ -265,7 +274,7 @@ void SceneManager::SetupSceneLights()
 	m_pShaderManager->setFloatValue("lightSources[0].specularIntensity", 0.06f);
 	m_pShaderManager->setFloatValue("lightSources[0].focalStrength", 2.0f);
 
-	// lightSources[1] — fill right (dim, higher, slightly forward; neutral corners)
+	// lightSources[1]: disabled
 	m_pShaderManager->setVec3Value("lightSources[1].position", 0.0f, 2.0f, 0.0f);
 	m_pShaderManager->setVec3Value("lightSources[1].ambientColor", 0.0f, 0.0f, 0.0f);
 	m_pShaderManager->setVec3Value("lightSources[1].diffuseColor", 0.0f, 0.0f, 0.0f);
@@ -273,7 +282,7 @@ void SceneManager::SetupSceneLights()
 	m_pShaderManager->setFloatValue("lightSources[1].specularIntensity", 0.0f);
 	m_pShaderManager->setFloatValue("lightSources[1].focalStrength", 1.0f);
 
-	// lightSources[2] — fill left (mirror of right fill)
+	// lightSources[3]: disabled
 	m_pShaderManager->setVec3Value("lightSources[2].position", -6.0f, 13.5f, 0.0f);
 	m_pShaderManager->setVec3Value("lightSources[2].ambientColor", 0.02f, 0.02f, 0.02f);
 	m_pShaderManager->setVec3Value("lightSources[2].diffuseColor", 0.04f, 0.04f, 0.04f);
@@ -355,8 +364,7 @@ void SceneManager::RenderScene()
 		ZrotationDegrees,
 		positionXYZ);
 
-	// set the active color values in the shader (RGBA)
-	//SetShaderColor(1, 1, 1, 1);
+	// set the material for this mesh
 	SetShaderMaterial("cement");
 
 	// draw the mesh with transformation values - this plane is used for the base
@@ -386,8 +394,7 @@ void SceneManager::RenderScene()
 		ZrotationDegrees,
 		positionXYZ);
 
-	// set the active color values in the shader (RGBA)
-	//SetShaderColor(1, 1, 1, 1);
+	// set the material for this mesh
 	SetShaderMaterial("gold");
 
 	m_basicMeshes->DrawCylinderMesh();
@@ -416,8 +423,7 @@ void SceneManager::RenderScene()
 		ZrotationDegrees,
 		positionXYZ);
 
-	// set the active color values in the shader (RGBA)
-	//SetShaderColor(1, 1, 1, 1);
+	// set the material for this mesh
 	SetShaderMaterial("wood");
 
 	m_basicMeshes->DrawBoxMesh();
@@ -446,8 +452,7 @@ void SceneManager::RenderScene()
 		ZrotationDegrees,
 		positionXYZ);
 
-	// set the active color values in the shader (RGBA)
-	//SetShaderColor(1, 1, 1, 1);
+	// set the material for this mesh
 	SetShaderMaterial("tile");
 
 	m_basicMeshes->DrawBoxMesh();
@@ -476,8 +481,7 @@ void SceneManager::RenderScene()
 		ZrotationDegrees,
 		positionXYZ);
 
-	// set the active color values in the shader (RGBA)
-	//SetShaderColor(1, 1, 1, 1);
+	// set the material for this mesh
 	SetShaderMaterial("glass");
 
 	m_basicMeshes->DrawSphereMesh();
@@ -506,8 +510,7 @@ void SceneManager::RenderScene()
 		ZrotationDegrees,
 		positionXYZ);
 
-	// set the active color values in the shader (RGBA)
-	//SetShaderColor(1, 1, 1, 1);
+	// set the material for this mesh
 	SetShaderMaterial("clay");
 
 	m_basicMeshes->DrawConeMesh();
