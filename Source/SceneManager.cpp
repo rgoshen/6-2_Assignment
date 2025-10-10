@@ -59,31 +59,18 @@ SceneManager::~SceneManager()
  ***********************************************************/
 bool SceneManager::FindMaterial(std::string tag, OBJECT_MATERIAL& material)
 {
-	if (m_objectMaterials.size() == 0)
+	// Returns true if a material with the given tag exists.
+	// Fix: original version always returned true (even when not found).
+	// This version copies the found material into 'material' and returns false otherwise.
+	for (const auto& m : m_objectMaterials)
 	{
-		return(false);
-	}
-
-	int index = 0;
-	bool bFound = false;
-	while ((index < m_objectMaterials.size()) && (bFound == false))
-	{
-		if (m_objectMaterials[index].tag.compare(tag) == 0)
+		if (m.tag == tag)
 		{
-			bFound = true;
-			material.ambientColor = m_objectMaterials[index].ambientColor;
-			material.ambientStrength = m_objectMaterials[index].ambientStrength;
-			material.diffuseColor = m_objectMaterials[index].diffuseColor;
-			material.specularColor = m_objectMaterials[index].specularColor;
-			material.shininess = m_objectMaterials[index].shininess;
-		}
-		else
-		{
-			index++;
+			material = m;
+			return true;
 		}
 	}
-
-	return(true);
+	return false;
 }
 
 /***********************************************************
