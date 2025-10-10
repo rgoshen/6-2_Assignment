@@ -200,32 +200,32 @@ void SceneManager::DefineObjectMaterials()
 	/*** be defined. Refer to the code in the OpenGL Sample for help  ***/
 
 	OBJECT_MATERIAL goldMaterial;
-	goldMaterial.ambientColor = glm::vec3(0.2f, 0.2f, 0.1f);
-	goldMaterial.ambientStrength = 0.4f;
-	goldMaterial.diffuseColor = glm::vec3(0.3f, 0.3f, 0.2f);
-	goldMaterial.specularColor = glm::vec3(0.6f, 0.5f, 0.4f);
-	goldMaterial.shininess = 22.0f;
+	goldMaterial.ambientColor = glm::vec3(0.20f, 0.20f, 0.10f);
+	goldMaterial.ambientStrength = 0.22f;
+	goldMaterial.diffuseColor = glm::vec3(0.08f, 0.08f, 0.05f);
+	goldMaterial.specularColor = glm::vec3(0.80f, 0.80f, 0.80f);
+	goldMaterial.shininess = 128.0f;
 	goldMaterial.tag = "gold";
 
 	m_objectMaterials.push_back(goldMaterial);
 
 
 	OBJECT_MATERIAL cementMaterial;
-	cementMaterial.ambientColor = glm::vec3(0.2f, 0.2f, 0.1f);
-	cementMaterial.ambientStrength = 0.2f;
-	cementMaterial.diffuseColor = glm::vec3(0.5f, 0.5f, 0.5f);
-	cementMaterial.specularColor = glm::vec3(0.4f, 0.4f, 0.4f);
-	cementMaterial.shininess = 0.5f;
+	cementMaterial.ambientColor = glm::vec3(0.20f, 0.20f, 0.20f);
+	cementMaterial.ambientStrength = 0.28f;
+	cementMaterial.diffuseColor = glm::vec3(0.22f);
+	cementMaterial.specularColor = glm::vec3(0.0f);   // no specular on floor
+	cementMaterial.shininess = 1.0f;
 	cementMaterial.tag = "cement";
 
 	m_objectMaterials.push_back(cementMaterial);
 
 	OBJECT_MATERIAL woodMaterial;
-	woodMaterial.ambientColor = glm::vec3(0.2f, 0.2f, 0.1f);
-	woodMaterial.ambientStrength = 0.2f;
-	woodMaterial.diffuseColor = glm::vec3(0.5f, 0.5f, 0.5f);
-	woodMaterial.specularColor = glm::vec3(0.4f, 0.4f, 0.4f);
-	woodMaterial.shininess = 0.5f;
+	woodMaterial.ambientColor = glm::vec3(0.22f, 0.22f, 0.22f);
+	woodMaterial.ambientStrength = 0.28f;
+	woodMaterial.diffuseColor = glm::vec3(0.38f, 0.38f, 0.38f);
+	woodMaterial.specularColor = glm::vec3(0.02f, 0.02f, 0.02f);
+	woodMaterial.shininess = 2.0f;
 	woodMaterial.tag = "wood";
 
 	m_objectMaterials.push_back(woodMaterial);
@@ -244,18 +244,18 @@ void SceneManager::DefineObjectMaterials()
 	glassMaterial.ambientColor = glm::vec3(0.4f, 0.4f, 0.4f);
 	glassMaterial.ambientStrength = 0.3f;
 	glassMaterial.diffuseColor = glm::vec3(0.3f, 0.4f, 0.4f);
-	glassMaterial.specularColor = glm::vec3(0.6f, 0.6f, 0.6f);
-	glassMaterial.shininess = 85.0f;
+	glassMaterial.specularColor = glm::vec3(0.55f);
+	glassMaterial.shininess = 32.0f;
 	glassMaterial.tag = "glass";
 
 	m_objectMaterials.push_back(glassMaterial);
 
 	OBJECT_MATERIAL clayMaterial;
-	clayMaterial.ambientColor = glm::vec3(0.2f, 0.2f, 0.3f);
-	clayMaterial.ambientStrength = 0.3f;
-	clayMaterial.diffuseColor = glm::vec3(0.4f, 0.4f, 0.5f);
-	clayMaterial.specularColor = glm::vec3(0.2f, 0.2f, 0.4f);
-	clayMaterial.shininess = 0.5f;
+	clayMaterial.ambientColor = glm::vec3(0.25f, 0.25f, 0.30f);
+	clayMaterial.ambientStrength = 0.45f;
+	clayMaterial.diffuseColor = glm::vec3(0.45f, 0.45f, 0.50f);
+	clayMaterial.specularColor = glm::vec3(0.0f);
+	clayMaterial.shininess = 2.0f;
 	clayMaterial.tag = "clay";
 
 	m_objectMaterials.push_back(clayMaterial);
@@ -280,26 +280,37 @@ void SceneManager::SetupSceneLights()
 	/*** Up to four light sources can be defined. Refer to the code ***/
 	/*** in the OpenGL Sample for help                              ***/
 
-	m_pShaderManager->setVec3Value("lightSources[0].position", 3.0f, 14.0f, 0.0f);
-	m_pShaderManager->setVec3Value("lightSources[0].ambientColor", 0.01f, 0.01f, 0.01f);
-	m_pShaderManager->setVec3Value("lightSources[0].diffuseColor", 0.4f, 0.4f, 0.4f);
-	m_pShaderManager->setVec3Value("lightSources[0].specularColor", 0.0f, 0.0f, 0.0f);
-	m_pShaderManager->setFloatValue("lightSources[0].focalStrength", 32.0f);
-	m_pShaderManager->setFloatValue("lightSources[0].specularIntensity", 0.05f);
+	 // lightSources[0] — overhead key (broad, modest specular)
+	m_pShaderManager->setVec3Value("lightSources[0].position", -8.0f, 16.0f, 8.0f);
+	m_pShaderManager->setVec3Value("lightSources[0].ambientColor", 0.05f, 0.05f, 0.05f);
+	m_pShaderManager->setVec3Value("lightSources[0].diffuseColor", 0.07f, 0.07f, 0.07f);
+	m_pShaderManager->setVec3Value("lightSources[0].specularColor", 0.10f, 0.10f, 0.10f);
+	m_pShaderManager->setFloatValue("lightSources[0].specularIntensity", 0.08f);
+	m_pShaderManager->setFloatValue("lightSources[0].focalStrength", 2.0f);
 
-	m_pShaderManager->setVec3Value("lightSources[1].position", -3.0f, 14.0f, 0.0f);
-	m_pShaderManager->setVec3Value("lightSources[1].ambientColor", 0.01f, 0.01f, 0.01f);
-	m_pShaderManager->setVec3Value("lightSources[1].diffuseColor", 0.4f, 0.4f, 0.4f);
+	// lightSources[1] — fill right (dim, higher, slightly forward; neutral corners)
+	m_pShaderManager->setVec3Value("lightSources[1].position", 0.0f, 2.0f, 0.0f);
+	m_pShaderManager->setVec3Value("lightSources[1].ambientColor", 0.0f, 0.0f, 0.0f);
+	m_pShaderManager->setVec3Value("lightSources[1].diffuseColor", 0.0f, 0.0f, 0.0f);
 	m_pShaderManager->setVec3Value("lightSources[1].specularColor", 0.0f, 0.0f, 0.0f);
-	m_pShaderManager->setFloatValue("lightSources[1].focalStrength", 32.0f);
-	m_pShaderManager->setFloatValue("lightSources[1].specularIntensity", 0.05f);
+	m_pShaderManager->setFloatValue("lightSources[1].specularIntensity", 0.0f);
+	m_pShaderManager->setFloatValue("lightSources[1].focalStrength", 1.0f);
 
-	m_pShaderManager->setVec3Value("lightSources[2].position", 0.6f, 5.0f, 6.0f);
-	m_pShaderManager->setVec3Value("lightSources[2].ambientColor", 0.01f, 0.01f, 0.01f);
-	m_pShaderManager->setVec3Value("lightSources[2].diffuseColor", 0.3f, 0.3f, 0.3f);
-	m_pShaderManager->setVec3Value("lightSources[2].specularColor", 0.3f, 0.3f, 0.3f);
-	m_pShaderManager->setFloatValue("lightSources[2].focalStrength", 12.0f);
-	m_pShaderManager->setFloatValue("lightSources[2].specularIntensity", 0.5f);
+	// lightSources[2] — fill left (mirror of right fill)
+	m_pShaderManager->setVec3Value("lightSources[2].position", -6.0f, 13.5f, 0.0f);
+	m_pShaderManager->setVec3Value("lightSources[2].ambientColor", 0.02f, 0.02f, 0.02f);
+	m_pShaderManager->setVec3Value("lightSources[2].diffuseColor", 0.04f, 0.04f, 0.04f);
+	m_pShaderManager->setVec3Value("lightSources[2].specularColor", 0.0f, 0.0f, 0.0f);
+	m_pShaderManager->setFloatValue("lightSources[2].specularIntensity", 0.0f);
+	m_pShaderManager->setFloatValue("lightSources[2].focalStrength", 2.0f);
+
+	// lightSources[3] — low bounce (gentle lift; no specular)
+	m_pShaderManager->setVec3Value("lightSources[3].position", 0.0f, 2.0f, 0.0f);
+	m_pShaderManager->setVec3Value("lightSources[3].ambientColor", 0.0f, 0.0f, 0.0f);
+	m_pShaderManager->setVec3Value("lightSources[3].diffuseColor", 0.0f, 0.0f, 0.0f);
+	m_pShaderManager->setVec3Value("lightSources[3].specularColor", 0.0f, 0.0f, 0.0f);
+	m_pShaderManager->setFloatValue("lightSources[3].specularIntensity", 0.0f);
+	m_pShaderManager->setFloatValue("lightSources[3].focalStrength", 1.0f);
 
 }
 
@@ -346,7 +357,7 @@ void SceneManager::RenderScene()
 
 	/*** Set needed transformations before drawing the basic mesh.  ***/
 	/*** This same ordering of code should be used for transforming ***/
-	/*** and drawing all the basic 3D shapes.						***/
+	/*** and drawing all the basic 3D shapes. (Floor)				***/
 	/******************************************************************/
 	// set the XYZ scale for the mesh
 	scaleXYZ = glm::vec3(20.0f, 1.0f, 10.0f);
@@ -377,7 +388,7 @@ void SceneManager::RenderScene()
 
 	/*** Set needed transformations before drawing the basic mesh.  ***/
 	/*** This same ordering of code should be used for transforming ***/
-	/*** and drawing all the basic 3D shapes.						***/
+	/*** and drawing all the basic 3D shapes. (Fulcrum)				***/
 	/******************************************************************/
 	// set the XYZ scale for the mesh
 	scaleXYZ = glm::vec3(0.9f, 2.8f, 0.9f);
@@ -407,7 +418,7 @@ void SceneManager::RenderScene()
 
 	/*** Set needed transformations before drawing the basic mesh.  ***/
 	/*** This same ordering of code should be used for transforming ***/
-	/*** and drawing all the basic 3D shapes.						***/
+	/*** and drawing all the basic 3D shapes. (Plank)				***/
 	/******************************************************************/
 	// set the XYZ scale for the mesh
 	scaleXYZ = glm::vec3(1.0f, 9.0f, 1.3f);
@@ -415,7 +426,7 @@ void SceneManager::RenderScene()
 	// set the XYZ rotation for the mesh
 	XrotationDegrees = 0.0f;
 	YrotationDegrees = 0.0f;
-	ZrotationDegrees = 95.0f;
+	ZrotationDegrees = 90.0f;
 
 	// set the XYZ position for the mesh
 	positionXYZ = glm::vec3(0.2f, 2.27f, 2.0f);
@@ -437,7 +448,7 @@ void SceneManager::RenderScene()
 
 	/*** Set needed transformations before drawing the basic mesh.  ***/
 	/*** This same ordering of code should be used for transforming ***/
-	/*** and drawing all the basic 3D shapes.						***/
+	/*** and drawing all the basic 3D shapes. (Cube)				***/
 	/******************************************************************/
 	// set the XYZ scale for the mesh
 	scaleXYZ = glm::vec3(1.7f, 1.5f, 1.5f);
@@ -467,7 +478,7 @@ void SceneManager::RenderScene()
 
 	/*** Set needed transformations before drawing the basic mesh.  ***/
 	/*** This same ordering of code should be used for transforming ***/
-	/*** and drawing all the basic 3D shapes.						***/
+	/*** and drawing all the basic 3D shapes. (Ball)				***/
 	/******************************************************************/
 	// set the XYZ scale for the mesh
 	scaleXYZ = glm::vec3(1.0f, 1.0f, 1.0f);
@@ -497,7 +508,7 @@ void SceneManager::RenderScene()
 
 	/*** Set needed transformations before drawing the basic mesh.  ***/
 	/*** This same ordering of code should be used for transforming ***/
-	/*** and drawing all the basic 3D shapes.						***/
+	/*** and drawing all the basic 3D shapes. (Cone)				***/
 	/******************************************************************/
 	// set the XYZ scale for the mesh
 	scaleXYZ = glm::vec3(1.2f, 4.0f, 1.2f);

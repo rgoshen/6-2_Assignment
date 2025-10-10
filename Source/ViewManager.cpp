@@ -54,10 +54,24 @@ ViewManager::ViewManager(
 	m_pWindow = NULL;
 	g_pCamera = new Camera();
 	// default camera view parameters
-	g_pCamera->Position = glm::vec3(0.0f, 2.0f, 12.0f);
-	g_pCamera->Front = glm::vec3(0.0f, 0.5f, -3.0f);
+	g_pCamera->Position = glm::vec3(0.0f, 9.0f, 14.0f); //place camera higher and farther back
+
+	// Aim downward toward the scene center
+	glm::vec3 target = glm::vec3(0.0f, 2.0f, 2.0f);
+	glm::vec3 dir = glm::normalize(target - g_pCamera->Position);
+
+	// Convert direction -> yaw/pitch
+	g_pCamera->Yaw = glm::degrees(atan2f(dir.z, dir.x)); // approx -90 degrees
+	g_pCamera->Pitch = glm::degrees(asinf(dir.y)); // approx -30 degrees
+
+	// Force camera to recalc Front/Right?up after manual Yaw/Pitch set
+	g_pCamera->ProcessMouseMovement(0.0f, 0.0f);
+
+	// Keep world "up" direction
 	g_pCamera->Up = glm::vec3(0.0f, 1.0f, 0.0f);
-	g_pCamera->Zoom = 80;
+
+	// Narrower field fo view (less wide angle)
+	g_pCamera->Zoom = 74.0f;
 }
 
 /***********************************************************
