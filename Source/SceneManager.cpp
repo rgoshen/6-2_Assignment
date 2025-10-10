@@ -148,23 +148,15 @@ void SceneManager::SetShaderColor(
 void SceneManager::SetShaderMaterial(
 	std::string materialTag)
 {
-	if (m_objectMaterials.size() > 0)
-	{
-		OBJECT_MATERIAL material;
-		bool bReturn = false;
+	// Guard: only upload uniforms if the material tag was found.
+	OBJECT_MATERIAL material;
+	if (!FindMaterial(materialTag, material)) return;
 
-		// find the defined material that matches the tag
-		bReturn = FindMaterial(materialTag, material);
-		if (bReturn == true)
-		{
-			// pass the material properties into the shader
-			m_pShaderManager->setVec3Value("material.ambientColor", material.ambientColor);
-			m_pShaderManager->setFloatValue("material.ambientStrength", material.ambientStrength);
-			m_pShaderManager->setVec3Value("material.diffuseColor", material.diffuseColor);
-			m_pShaderManager->setVec3Value("material.specularColor", material.specularColor);
-			m_pShaderManager->setFloatValue("material.shininess", material.shininess);
-		}
-	}
+	m_pShaderManager->setVec3Value("material.ambientColor", material.ambientColor);
+	m_pShaderManager->setFloatValue("material.ambientStrength", material.ambientStrength);
+	m_pShaderManager->setVec3Value("material.diffuseColor", material.diffuseColor);
+	m_pShaderManager->setVec3Value("material.specularColor", material.specularColor);
+	m_pShaderManager->setFloatValue("material.shininess", material.shininess);
 }
 
 /**************************************************************/
