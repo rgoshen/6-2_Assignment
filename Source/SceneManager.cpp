@@ -41,14 +41,12 @@ SceneManager::SceneManager(ShaderManager *pShaderManager)
 SceneManager::~SceneManager()
 {
 	// free up the allocated memory
-	m_pShaderManager = NULL;
-	if (NULL != m_basicMeshes)
+	m_pShaderManager = nullptr;
+	if (m_basicMeshes)
 	{
 		delete m_basicMeshes;
-		m_basicMeshes = NULL;
+		m_basicMeshes = nullptr;
 	}
-	// clear the collection of defined materials
-	m_objectMaterials.clear();
 }
 
 /***********************************************************
@@ -105,7 +103,7 @@ void SceneManager::SetTransformations(
 
 	// matrix math is used to calculate the final model matrix
 	modelView = translation * rotationX * rotationY * rotationZ * scale;
-	if (NULL != m_pShaderManager)
+	if (m_pShaderManager)
 	{
 		// pass the model matrix into the shader
 		m_pShaderManager->setMat4Value(g_ModelName, modelView);
@@ -132,7 +130,7 @@ void SceneManager::SetShaderColor(
 	currentColor.b = blueColorValue;
 	currentColor.a = alphaValue;
 
-	if (NULL != m_pShaderManager)
+	if (m_pShaderManager)
 	{
 		// pass the color values into the shader
 		m_pShaderManager->setVec4Value(g_ColorValueName, currentColor);
