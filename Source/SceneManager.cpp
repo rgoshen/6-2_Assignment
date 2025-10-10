@@ -158,13 +158,6 @@ void SceneManager::SetShaderMaterial(
 	m_pShaderManager->setFloatValue("material.shininess", material.shininess);
 }
 
-/**************************************************************/
-/*** STUDENTS CAN MODIFY the code in the methods BELOW for  ***/
-/*** preparing and rendering their own 3D replicated scenes.***/
-/*** Please refer to the code in the OpenGL sample project  ***/
-/*** for assistance.                                        ***/
-/**************************************************************/
-
  /***********************************************************
   *  DefineObjectMaterials()
   *
@@ -181,9 +174,6 @@ void SceneManager::SetShaderMaterial(
   ***********************************************************/
 void SceneManager::DefineObjectMaterials()
 {
-	/*** STUDENTS - add the code BELOW for defining object materials. ***/
-	/*** There is no limit to the number of object materials that can ***/
-	/*** be defined. Refer to the code in the OpenGL Sample for help  ***/
 
 	OBJECT_MATERIAL goldMaterial;
 	goldMaterial.ambientColor = glm::vec3(0.20f, 0.20f, 0.10f);
@@ -256,15 +246,8 @@ void SceneManager::DefineObjectMaterials()
  ***********************************************************/
 void SceneManager::SetupSceneLights()
 {
-	// this line of code is NEEDED for telling the shaders to render 
-	// the 3D scene with custom lighting, if no light sources have
-	// been added then the display window will be black - to use the 
-	// default OpenGL lighting then comment out the following line
+	// Enable the shader's custom Phong lighting path.
 	m_pShaderManager->setBoolValue(g_UseLightingName, true);
-
-	/*** STUDENTS - add the code BELOW for setting up light sources ***/
-	/*** Up to four light sources can be defined. Refer to the code ***/
-	/*** in the OpenGL Sample for help                              ***/
 
 	// lightSources[0]: overhead key (broad, modest specular)
 	m_pShaderManager->setVec3Value("lightSources[0].position", -8.0f, 16.0f, 8.0f);
