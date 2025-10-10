@@ -285,7 +285,7 @@ void SceneManager::SetupSceneLights()
 	m_pShaderManager->setVec3Value("lightSources[0].ambientColor", 0.05f, 0.05f, 0.05f);
 	m_pShaderManager->setVec3Value("lightSources[0].diffuseColor", 0.07f, 0.07f, 0.07f);
 	m_pShaderManager->setVec3Value("lightSources[0].specularColor", 0.10f, 0.10f, 0.10f);
-	m_pShaderManager->setFloatValue("lightSources[0].specularIntensity", 0.08f);
+	m_pShaderManager->setFloatValue("lightSources[0].specularIntensity", 0.06f);
 	m_pShaderManager->setFloatValue("lightSources[0].focalStrength", 2.0f);
 
 	// lightSources[1] — fill right (dim, higher, slightly forward; neutral corners)
